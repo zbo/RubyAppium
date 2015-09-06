@@ -20,7 +20,7 @@ desired_caps = {
 }
 
 describe 'Login' do
-  it 'should should login rc clinet using fix account' do
+  it 'should should login rc client using fix account' do
     @driver=Appium::Driver.new(desired_caps).start_driver
     @auto=Auto.new(@driver)
     debugger
@@ -39,7 +39,13 @@ describe 'Login' do
       @auto.sendkeys('com.ringcentral.android:id/password','Test!123')
       @auto.clickbutton('com.ringcentral.android:id/btnSignIn')
     end
-    #debugger
+    debugger
+  end
+
+  after(:each) do
+    debugger
+    p 'quit driver'
     @driver.quit()
-end
+  end
+  
 end

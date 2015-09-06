@@ -3,6 +3,7 @@ require 'rubygems'
 require 'appium_lib'
 require 'debugger'
 require './auto.rb'
+require './page.rb'
 
 APP_PATH = '/Users/bob.zhu/project/rb/RBTests/RCMobile_7.4.0.1.95_Production.apk'
 
@@ -24,28 +25,27 @@ describe 'Login' do
     @driver=Appium::Driver.new(desired_caps).start_driver
     @auto=Auto.new(@driver)
     debugger
-    if @auto.rc_find_element_by_id('com.ringcentral.android:id/btn_main_menu_action_menu')
+    @page=Page.new(@driver)
+    currentPage=@page.whichPage()
+
+    if currentPage==$LoginSucceed
       p 'already log in do nothing'
-    end
-    if @auto.rc_find_element_by_id('com.ringcentral.android:id/btnStart')
+    elsif currentPage==$LoginAgree1
       p 'encryption start button need click'
       @auto.clickbutton('com.ringcentral.android:id/btnStart')
-    end
-    if @auto.rc_find_element_by_id('com.ringcentral.android:id/btnOk')
       p 'encryption second screen'
       @auto.clickbutton('com.ringcentral.android:id/btnOk')
-    else
+    elsif currentPage==$LoginUserPass
+      p 'need input login username and password'
       @auto.sendkeys('com.ringcentral.android:id/phone','8772010001')
       @auto.sendkeys('com.ringcentral.android:id/password','Test!123')
       @auto.clickbutton('com.ringcentral.android:id/btnSignIn')
     end
-    debugger
   end
 
   after(:each) do
-    debugger
     p 'quit driver'
     @driver.quit()
   end
-  
+
 end

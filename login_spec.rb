@@ -4,8 +4,10 @@ require 'appium_lib'
 require 'debugger'
 require './auto.rb'
 require './page.rb'
+require './report.rb'
 
 APP_PATH = '/Users/bob.zhu/project/rb/RBTests/RCMobile_7.4.0.1.95_Production.apk'
+REPORT_PATH = '/Users/bob.zhu/project/rb/login/report/'
 
 desired_caps = {
     caps:       {
@@ -24,19 +26,20 @@ describe 'Login' do
   it 'should should login rc client using fix account' do
     @driver=Appium::Driver.new(desired_caps).start_driver
     @auto=Auto.new(@driver)
-    debugger
     @page=Page.new(@driver)
+    @report=Report.new(REPORT_PATH)
     currentPage=@page.whichPage()
 
+    @report.log('start test',$succeed)
     if currentPage==$LoginSucceed
-      p 'already log in do nothing'
+      @report.log('already login to rc app',$succeed)
     elsif currentPage==$LoginAgree1
-      p 'encryption start button need click'
+      @report.log('rc app encryption agree screen 1',$succeed)
       @auto.clickbutton('com.ringcentral.android:id/btnStart')
-      p 'encryption second screen'
+      @report.log('rc app encryption agree screen 2',$succeed)
       @auto.clickbutton('com.ringcentral.android:id/btnOk')
     elsif currentPage==$LoginUserPass
-      p 'need input login username and password'
+      @report.log('need input login username and password',$succeed)
       @auto.sendkeys('com.ringcentral.android:id/phone','8772010001')
       @auto.sendkeys('com.ringcentral.android:id/password','Test!123')
       @auto.clickbutton('com.ringcentral.android:id/btnSignIn')
@@ -44,7 +47,8 @@ describe 'Login' do
   end
 
   after(:each) do
-    p 'quit driver'
+    @report.log('quit driver',$succeed)
+    @report.renderall()
     @driver.quit()
   end
 

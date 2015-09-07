@@ -1,5 +1,6 @@
 require 'debugger'
 require 'uuid'
+require 'json'
 
 class Log
   $succeed=1
@@ -25,9 +26,13 @@ class Report
 
   def renderall
     p 'render to file'
-    #debugger
+    debugger
     file=open(@filePath+Time.new.strftime("%Y-%m-%d-%H:%M:%S")+'-'+rand(999999).to_s,'a')
-    #file.puts('aaaaaabbbbbbb')
+    @all.each do |one|
+      hash = {}
+      one.instance_variables.each{|var| hash[var.to_s.delete("@")] = one.instance_variable_get(var)}
+      file.puts(hash.to_json)
+    end
     file.close()
     return @all
   end

@@ -7,5 +7,6 @@ gem 'cucumber',           '~> 1.3.15'
 gem 'rspec-expectations', '~> 2.14.5'
 gem 'spec',               '~> 5.3.4'
 gem 'sauce_whisk',        '~> 0.0.13'
-gem 'test-unit',          '~> 2.5.5' # required for bundle exec ruby xunit_android.rb
-gem 'debugger'
+gem 'test-unit',          '~> 2.5.5'
+gem 'debugger',           '~> 1.6.8'
+gem 'uuid',               '~> 2.0.0'

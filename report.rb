@@ -1,4 +1,5 @@
 require 'debugger'
+require 'uuid'
 
 class Log
   $succeed=1
@@ -24,6 +25,10 @@ class Report
 
   def renderall
     p 'render to file'
+    #debugger
+    file=open(@filePath+Time.new.strftime("%Y-%m-%d-%H:%M:%S")+'-'+rand(999999).to_s,'a')
+    #file.puts('aaaaaabbbbbbb')
+    file.close()
     return @all
   end
 end

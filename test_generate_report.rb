@@ -16,6 +16,3 @@ class Report_Generation < Test::Unit::TestCase
     assert_equal(4,all.size)
   end
 end
-#file=open('./report/test2.html','a')
-#file.puts('aaaaaabbbbbbb')
-#file.close()

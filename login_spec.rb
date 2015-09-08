@@ -23,7 +23,12 @@ desired_caps = {
 }
 
 describe 'Login' do
-  before do
+  before(:all) do
+    
+    @filename=Time.new.strftime("%Y-%m-%d-%H:%M:%S")+'-'+rand(999999).to_s
+  end
+
+  before(:each) do
     @driver=Appium::Driver.new(desired_caps).start_driver
     @auto=Auto.new(@driver)
     @page=Page.new(@driver)
@@ -31,10 +36,8 @@ describe 'Login' do
   end
 
   it 'should should login rc client using fix account' do
-
     currentPage=@page.whichPage()
-
-    @report.log('start test',$succeed)
+    @report.log('start test login',$succeed)
     if currentPage==$LoginUserPass
       @report.log('need input login username and password',$succeed)
       @auto.sendkeys('com.ringcentral.android:id/phone','8772010001')
@@ -52,8 +55,9 @@ describe 'Login' do
   end
 
   it 'should find all main tab buttons' do
+    @report.log('start test main tabs',$succeed)
     all4=@driver.find_elements(:id,'com.ringcentral.android:id/tab_main_text')
-    debugger
+    @report.log('verify main tabs',$succeed)
     all4[0].text.should == 'Messages'
     all4[1].text.should == 'Call Log'
     all4[2].text.should == 'Contacts'
@@ -62,8 +66,7 @@ describe 'Login' do
 
   after do
     @report.log('quit driver',$succeed)
-    @report.renderall()
-    debugger
+    @report.renderall(@filename)
     @driver.quit()
   end
 

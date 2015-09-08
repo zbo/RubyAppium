@@ -23,8 +23,8 @@ class Report
     @all.push(log)
   end
 
-  def renderall
-    file=open(@filePath+Time.new.strftime("%Y-%m-%d-%H:%M:%S")+'-'+rand(999999).to_s,'a')
+  def renderall(filename)
+    file=open(@filePath+filename,'a')
     @all.each do |one|
       hash = {}
       one.instance_variables.each{|var| hash[var.to_s.delete("@")] = one.instance_variable_get(var)}

@@ -23,32 +23,47 @@ desired_caps = {
 }
 
 describe 'Login' do
-  it 'should should login rc client using fix account' do
+  before do
     @driver=Appium::Driver.new(desired_caps).start_driver
     @auto=Auto.new(@driver)
     @page=Page.new(@driver)
     @report=Report.new(REPORT_PATH)
+  end
+
+  it 'should should login rc client using fix account' do
+
     currentPage=@page.whichPage()
 
     @report.log('start test',$succeed)
-    if currentPage==$LoginSucceed
-      @report.log('already login to rc app',$succeed)
+    if currentPage==$LoginUserPass
+      @report.log('need input login username and password',$succeed)
+      @auto.sendkeys('com.ringcentral.android:id/phone','8772010001')
+      @auto.sendkeys('com.ringcentral.android:id/password','Test!123')
+      @report.log('input username and password finished',$succeed)
+      @auto.clickbutton('com.ringcentral.android:id/btnSignIn')
     elsif currentPage==$LoginAgree1
       @report.log('rc app encryption agree screen 1',$succeed)
       @auto.clickbutton('com.ringcentral.android:id/btnStart')
       @report.log('rc app encryption agree screen 2',$succeed)
       @auto.clickbutton('com.ringcentral.android:id/btnOk')
-    elsif currentPage==$LoginUserPass
-      @report.log('need input login username and password',$succeed)
-      @auto.sendkeys('com.ringcentral.android:id/phone','8772010001')
-      @auto.sendkeys('com.ringcentral.android:id/password','Test!123')
-      @auto.clickbutton('com.ringcentral.android:id/btnSignIn')
+    elsif currentPage==$LoginSucceed
+      @report.log('already login to rc app',$succeed)
     end
   end
 
-  after(:each) do
+  it 'should find all main tab buttons' do
+    all4=@driver.find_elements(:id,'com.ringcentral.android:id/tab_main_text')
+    debugger
+    all4[0].text.should == 'Messages'
+    all4[1].text.should == 'Call Log'
+    all4[2].text.should == 'Contacts'
+    all4[3].text.should == 'Dial Pad'
+  end
+
+  after do
     @report.log('quit driver',$succeed)
     @report.renderall()
+    debugger
     @driver.quit()
   end
 

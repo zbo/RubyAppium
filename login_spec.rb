@@ -24,7 +24,6 @@ desired_caps = {
 
 describe 'Login' do
   before(:all) do
-    
     @filename=Time.new.strftime("%Y-%m-%d-%H:%M:%S")+'-'+rand(999999).to_s
   end
 

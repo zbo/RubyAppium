@@ -12,7 +12,7 @@ class Report_Generation < Test::Unit::TestCase
     @report.log('step 1',$succeed)
     @report.log('step 2',$succeed)
     @report.log('step 3',$failed)
-    all=@report.renderall()
+    all=@report.renderall('test_report_generation')
     assert_equal(4,all.size)
   end
 end

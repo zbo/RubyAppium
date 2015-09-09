@@ -38,25 +38,25 @@ describe 'Login' do
     currentPage=@page.whichPage()
     @report.log('start test login',$succeed)
     if currentPage==$LoginUserPass
-      @report.log('need input login username and password',$succeed)
+      @report.logs('need input login username and password',$succeed,$screen_cut_on)
       @auto.sendkeys('com.ringcentral.android:id/phone','8772010001')
       @auto.sendkeys('com.ringcentral.android:id/password','Test!123')
-      @report.log('input username and password finished',$succeed)
+      @report.logs('input username and password finished',$succeed,$screen_cut_on)
       @auto.clickbutton('com.ringcentral.android:id/btnSignIn')
     elsif currentPage==$LoginAgree1
-      @report.log('rc app encryption agree screen 1',$succeed)
+      @report.logs('rc app encryption agree screen 1',$succeed,$screen_cut_on)
       @auto.clickbutton('com.ringcentral.android:id/btnStart')
-      @report.log('rc app encryption agree screen 2',$succeed)
+      @report.logs('rc app encryption agree screen 2',$succeed,$screen_cut_on)
       @auto.clickbutton('com.ringcentral.android:id/btnOk')
     elsif currentPage==$LoginSucceed
-      @report.log('already login to rc app',$succeed)
+      @report.logs('already login to rc app',$succeed,$screen_cut_on)
     end
   end
 
   it 'should find all main tab buttons' do
-    @report.log('start test main tabs',$succeed)
+    @report.logs('start test main tabs',$succeed,$screen_cut_on)
     all4=@driver.find_elements(:id,'com.ringcentral.android:id/tab_main_text')
-    @report.log('verify main tabs',$succeed)
+    @report.logs('verify main tabs',$succeed,$screen_cut_on)
     all4[0].text.should == 'Messages'
     all4[1].text.should == 'Call Log'
     all4[2].text.should == 'Contacts'

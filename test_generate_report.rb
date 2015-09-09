@@ -8,7 +8,7 @@ class Report_Generation < Test::Unit::TestCase
     @report=Report.new(REPORT_PATH)
   end
   def test_generate
-    @report.log('start test',$succeed)
+    @report.logs('start test',$succeed,$screen_cut_on)
     @report.log('step 1',$succeed)
     @report.log('step 2',$succeed)
     @report.log('step 3',$failed)

@@ -5,10 +5,12 @@ require 'json'
 class Log
   $succeed=1
   $failed=0
-  def initialize(content,status)
+  $screen_cut_on='screen_shoot_needed'
+  $screen_cut_off='screen_shoot_no_need'
+  def initialize(content,status,screenfile)
     @content=content
     @status=status
-    @screen=''
+    @screen=screenfile
   end
 end
 
@@ -19,12 +21,19 @@ class Report
   end
 
   def log(content,status)
-    log=Log.new(content,status)
+    log=Log.new(content,status,'')
+    @all.push(log)
+  end
+
+  def logs(content,status,scrren)
+    logfile=self.screencut()
+    log=Log.new(content,status,logfile)
     @all.push(log)
   end
 
   def screencut()
-    filename=UUID.new.generate.to_s+'.png'
+    debugger
+    filename=rand(999999).to_s+'-'+rand(999999).to_s+'-'+rand(999999).to_s+'.png'
     cmd_cut='adb shell /system/bin/screencap -p /sdcard/'+filename
     system cmd_cut
     cmd_copy='adb pull /sdcard/'+filename+' '+@filePath+'screen'

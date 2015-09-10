@@ -10,9 +10,9 @@ class Gen_Script < Test::Unit::TestCase
     file = File.new("./sample_sequence.json", "r")
     str_json = read_file(file)
     pure_json = json_to_hash(str_json)
-    debugger
     file.close()
     gen.parse()
+    gen.generate(pure_json)
     p "="*50
   end
 
@@ -32,7 +32,6 @@ class Gen_Script < Test::Unit::TestCase
   def read_file(file)
     result=''
     file.each_line do |line|
-
       result=result+line.tr("\n",' ')
     end
     return result

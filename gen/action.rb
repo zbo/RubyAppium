@@ -1,14 +1,14 @@
 require 'debugger'
-class button_click
-  def initialize(id)
-    @id=id
+class Button_click
+  def initialize(json)
+    @id=json[0]['id']
   end
 end
-class send_keys
-  def initialize(id,keys)
-    @id=id
-    @keys=keys
+class Send_keys
+  def initialize(json)
+    @id=json[0]['id']
+    @keys=json[0]['keys']
   end
 end
-class assert_text_equal
+class Assert_text_equal
 end

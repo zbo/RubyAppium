@@ -1,6 +1,6 @@
 [
   {
-    "action": "button_click",
+    "action": "Button_click",
     "arguments": [
       {
         "id": "button_id_009"
@@ -8,7 +8,7 @@
     ]
   },
   {
-    "action": "send_keys",
+    "action": "Send_keys",
     "arguments": [
       {
         "id": "textbox_id_009"

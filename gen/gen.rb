@@ -1,7 +1,9 @@
 require 'debugger'
 require 'json'
+require './action.rb'
 
 class Gen
+  WORK_SPACE = '../workspace/'
   def initialize
 
   end
@@ -9,8 +11,12 @@ class Gen
   def generate(json)
     action_all=[]
     json.each do |j|
-      p j
+      class_name=j['action']
+      class_meta = Object.const_get(class_name)
+      action=class_meta.new(j['arguments'])
+      p action
     end
+    p WORK_SPACE
   end
 
   def name

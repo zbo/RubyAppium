@@ -1,0 +1,21 @@
+[
+  {
+    "action": "button_click",
+    "arguments": [
+      {
+        "id": "button_id_009"
+      }
+    ]
+  },
+  {
+    "action": "send_keys",
+    "arguments": [
+      {
+        "id": "textbox_id_009"
+      },
+      {
+        "content": "just for fun"
+      }
+    ]
+  }
+]

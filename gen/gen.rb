@@ -19,6 +19,13 @@ class Gen
     p WORK_SPACE
   end
 
+  def header
+    p 'generate header'
+    file = File.new("./header.rb", "r")
+    str_header = read_file(file)
+    p str_header
+  end
+
   def name
     return 'test script generator (I am the king :-)'
   end

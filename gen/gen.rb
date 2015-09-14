@@ -1,5 +1,6 @@
 require 'debugger'
 require 'json'
+require 'fileutils'
 require './action.rb'
 
 class Gen
@@ -7,7 +8,15 @@ class Gen
   def initialize
 
   end
+
+  def movelibs()
+    FileUtils.cp('../auto.rb', WORK_SPACE+'auto.rb')
+    FileUtils.cp('../page.rb', WORK_SPACE+'page.rb')
+    FileUtils.cp('../page.rb', WORK_SPACE+'report.rb')
+  end
+
   def generate(json)
+    movelibs()
     headers=header()
     render_header('script.rb',header)
     actions=action_body(json)

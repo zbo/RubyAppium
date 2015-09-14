@@ -7,7 +7,18 @@ class Gen
   def initialize
 
   end
-  def generate
+  def generate(json)
+    headers=header()
+    render_header('script.rb',header)
+    actions=action_body(json)
+    #debugger
+    p 'gen end'
+  end
+
+  def render_header(file_name,header)
+    file = File.new(WORK_SPACE+file_name, "w")
+    file.puts(header)
+    file.close()
   end
 
   def action_body(json)
@@ -16,9 +27,9 @@ class Gen
       class_name=j['action']
       class_meta = Object.const_get(class_name)
       action=class_meta.new(j['arguments'])
-      p action
+      action_all.push(action)
     end
-    p WORK_SPACE
+    return action_all
   end
 
   def header

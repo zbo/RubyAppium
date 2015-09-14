@@ -11,8 +11,7 @@ class Gen_Script < Test::Unit::TestCase
     str_json = read_file(file)
     pure_json = json_to_hash(str_json)
     file.close()
-    gen.parse()
-    gen.generate(pure_json)
+    gen.action_body(pure_json)
     p "="*50
   end
 

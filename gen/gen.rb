@@ -7,8 +7,10 @@ class Gen
   def initialize
 
   end
+  def generate
+  end
 
-  def generate(json)
+  def action_body(json)
     action_all=[]
     json.each do |j|
       class_name=j['action']
@@ -20,16 +22,15 @@ class Gen
   end
 
   def header
-    p 'generate header'
     file = File.new("./header.rb", "r")
-    str_header = read_file(file)
-    p str_header
+    header=[]
+    file.each_line do |line|
+      header.push(line)
+    end
+    return header
   end
 
   def name
     return 'test script generator (I am the king :-)'
-  end
-
-  def parse
   end
 end

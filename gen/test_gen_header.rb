@@ -7,13 +7,9 @@ class Gen_Header < Test::Unit::TestCase
     p '='*20+'start test'+'='*20
     gen=Gen.new()
     p gen.name()
-    gen.header()
+    header=gen.header()
+    p 'total lines in header: '+header.size.to_s
     p "="*50
-  end
-
-  def json_to_hash(json)
-    json_result = JSON.parse json
-    return json_result
   end
 
   def print_file(file)
@@ -24,11 +20,5 @@ class Gen_Header < Test::Unit::TestCase
     end
   end
 
-  def read_file(file)
-    result=''
-    file.each_line do |line|
-      result=result+line.tr("\n",' ')
-    end
-    return result
-  end
+
 end

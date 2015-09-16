@@ -25,18 +25,20 @@ class Gen
     movelibs()
     headers=header()
     render_str('script.rb',header)
-    actions=action_body(json)
-    render_body('script.rb',actions)
+    cases=action_body(json)
+    render_body('script.rb',cases)
     footer=footer()
     render_str('script.rb',footer)
     p 'gen end here'
   end
 
-  def render_body(file_name,actions)
+  def render_body(file_name,cases)
     file = File.new(WORK_SPACE+'/'+file_name, "a")
-    actions.each do |a|
-      content=a.render()
-      file.puts content
+    cases.each do |ca|
+      ca.get_actions.each do |a|
+        content=a.render()
+        file.puts content
+      end
     end
     file.close
   end

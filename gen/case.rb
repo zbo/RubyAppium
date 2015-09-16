@@ -6,4 +6,7 @@ class Case
   def set_actions(actions)
     @actions=actions
   end
+  def get_actions
+    return @actions
+  end
 end

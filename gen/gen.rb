@@ -1,18 +1,19 @@
 require 'debugger'
 require 'json'
 require 'fileutils'
-require './action.rb'
+require File.expand_path('../action', __FILE__)
 
 class Gen
-  WORK_SPACE = '../workspace/'
+  WORK_SPACE = File.expand_path('../../workspace', __FILE__)
   def initialize
 
   end
 
   def movelibs()
-    FileUtils.cp('../auto.rb', WORK_SPACE+'auto.rb')
-    FileUtils.cp('../page.rb', WORK_SPACE+'page.rb')
-    FileUtils.cp('../page.rb', WORK_SPACE+'report.rb')
+    debugger
+    FileUtils.cp(File.expand_path('../../auto.rb', __FILE__), WORK_SPACE+'/auto.rb')
+    FileUtils.cp(File.expand_path('../../page.rb', __FILE__), WORK_SPACE+'/page.rb')
+    FileUtils.cp(File.expand_path('../../report.rb', __FILE__), WORK_SPACE+'/report.rb')
   end
 
   def generate(json)
@@ -20,8 +21,13 @@ class Gen
     headers=header()
     render_header('script.rb',header)
     actions=action_body(json)
+    render_body('script.rb',actions)
     #debugger
     p 'gen end'
+  end
+
+  def render_body(file_name,actions)
+    p actions
   end
 
   def render_header(file_name,header)
@@ -42,7 +48,7 @@ class Gen
   end
 
   def header
-    file = File.new("./header.rb", "r")
+    file = File.new(File.expand_path('../header.rb', __FILE__), "r")
     header=[]
     file.each_line do |line|
       header.push(line)

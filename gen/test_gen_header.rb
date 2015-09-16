@@ -1,6 +1,6 @@
 require 'debugger'
 require 'test/unit'
-require './gen.rb'
+require File.expand_path('../gen', __FILE__)
 
 class Gen_Header < Test::Unit::TestCase
   def test_gen

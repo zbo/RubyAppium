@@ -1,6 +1,6 @@
 require 'debugger'
 require 'test/unit'
-require './report.rb'
+require File.expand_path('../report', __FILE__)
 
 class Take_Screencut < Test::Unit::TestCase
   REPORT_PATH='/Users/bob.zhu/project/rb/login/report/'

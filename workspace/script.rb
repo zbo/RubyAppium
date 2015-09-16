@@ -52,3 +52,6 @@ describe 'TOD_Test' do
       @report.logs('already login to rc app',$succeed,$screen_cut_on)
     end
   end
+render button click
+render send keys
+end

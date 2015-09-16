@@ -2,6 +2,7 @@ require 'debugger'
 require 'json'
 require 'fileutils'
 require File.expand_path('../action', __FILE__)
+require File.expand_path('../case', __FILE__)
 
 class Gen
   WORK_SPACE = File.expand_path('../../workspace', __FILE__)
@@ -24,24 +25,26 @@ class Gen
     movelibs()
     headers=header()
     render_str('script.rb',header)
-    footer=footer()
-    render_str('script.rb',footer)
     actions=action_body(json)
     render_body('script.rb',actions)
+    footer=footer()
+    render_str('script.rb',footer)
     p 'gen end here'
   end
 
   def render_body(file_name,actions)
+    file = File.new(WORK_SPACE+'/'+file_name, "a")
     actions.each do |a|
       content=a.render()
-      p content
+      file.puts content
     end
+    file.close
   end
 
   def render_str(file_name,str)
     file = File.new(WORK_SPACE+'/'+file_name, "a")
     file.puts(str)
-    file.close()
+    file.close
   end
 
   def clean_all()
@@ -50,14 +53,20 @@ class Gen
   end
 
   def action_body(json)
-    action_all=[]
+    case_all=[]
     json.each do |j|
-      class_name=j['action']
-      class_meta = Object.const_get(class_name)
-      action=class_meta.new(j['arguments'])
-      action_all.push(action)
+      test_case = Case.new(j)
+      action_all=[]
+      j['case']['actions'].each do |a|
+        class_name=a['action']
+        class_meta = Object.const_get(class_name)
+        action=class_meta.new(a['arguments'])
+        action_all.push(action)
+      end
+      test_case.set_actions(action_all)
+      case_all.push(test_case)
     end
-    return action_all
+    return case_all
   end
 
   def header

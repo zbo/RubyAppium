@@ -11,10 +11,8 @@
     "action": "Send_keys",
     "arguments": [
       {
-        "id": "textbox_id_009"
-      },
-      {
-        "content": "just for fun"
+        "id": "textbox_id_009",
+        "keys": "just keys"
       }
     ]
   }

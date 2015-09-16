@@ -2,9 +2,9 @@ require 'rspec'
 require 'rubygems'
 require 'appium_lib'
 require 'debugger'
-require './auto.rb'
-require './page.rb'
-require './report.rb'
+require File.expand_path('../auto.rb', __FILE__)
+require File.expand_path('../page.rb', __FILE__)
+require File.expand_path('../report.rb', __FILE__)
 
 APP_PATH = '/Users/bob.zhu/project/rb/RBTests/RCMobile_7.4.0.1.95_Production.apk'
 REPORT_PATH = '/Users/bob.zhu/project/rb/login/report/'

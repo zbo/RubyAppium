@@ -10,7 +10,6 @@ class Gen
   end
 
   def movelibs()
-    debugger
     FileUtils.cp(File.expand_path('../../auto.rb', __FILE__), WORK_SPACE+'/auto.rb')
     FileUtils.cp(File.expand_path('../../page.rb', __FILE__), WORK_SPACE+'/page.rb')
     FileUtils.cp(File.expand_path('../../report.rb', __FILE__), WORK_SPACE+'/report.rb')
@@ -22,16 +21,18 @@ class Gen
     render_header('script.rb',header)
     actions=action_body(json)
     render_body('script.rb',actions)
-    #debugger
-    p 'gen end'
+    p 'gen end here'
   end
 
   def render_body(file_name,actions)
-    p actions
+    actions.each do |a|
+      content=a.render()
+      p content
+    end
   end
 
   def render_header(file_name,header)
-    file = File.new(WORK_SPACE+file_name, "w")
+    file = File.new(WORK_SPACE+'/'+file_name, "w")
     file.puts(header)
     file.close()
   end

@@ -21,3 +21,15 @@ desired_caps = {
         sauce_access_key: nil
     }
 }
+
+describe 'Login' do
+  before(:all) do
+    @filename=Time.new.strftime("%Y-%m-%d-%H:%M:%S")+'-'+rand(999999).to_s
+  end
+
+  before(:each) do
+    @driver=Appium::Driver.new(desired_caps).start_driver
+    @auto=Auto.new(@driver)
+    @page=Page.new(@driver)
+    @report=Report.new(REPORT_PATH)
+  end

@@ -19,6 +19,4 @@ class Gen_Header < Test::Unit::TestCase
         counter = counter + 1
     end
   end
-
-
 end

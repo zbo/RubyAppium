@@ -5,6 +5,10 @@ require File.expand_path('../action', __FILE__)
 
 class Gen
   WORK_SPACE = File.expand_path('../../workspace', __FILE__)
+  def work_space
+    return WORK_SPACE
+  end
+
   def initialize
 
   end
@@ -16,9 +20,12 @@ class Gen
   end
 
   def generate(json)
+    clean_all()
     movelibs()
     headers=header()
-    render_header('script.rb',header)
+    render_str('script.rb',header)
+    footer=footer()
+    render_str('script.rb',footer)
     actions=action_body(json)
     render_body('script.rb',actions)
     p 'gen end here'
@@ -31,10 +38,15 @@ class Gen
     end
   end
 
-  def render_header(file_name,header)
-    file = File.new(WORK_SPACE+'/'+file_name, "w")
-    file.puts(header)
+  def render_str(file_name,str)
+    file = File.new(WORK_SPACE+'/'+file_name, "a")
+    file.puts(str)
     file.close()
+  end
+
+  def clean_all()
+    FileUtils.rm_rf(WORK_SPACE)
+    FileUtils.mkdir(WORK_SPACE)
   end
 
   def action_body(json)
@@ -55,6 +67,15 @@ class Gen
       header.push(line)
     end
     return header
+  end
+
+  def footer
+    file = File.new(File.expand_path('../footer.rb', __FILE__), "r")
+    footer=[]
+    file.each_line do |line|
+      footer.push(line)
+    end
+    return footer
   end
 
   def name

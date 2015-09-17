@@ -54,4 +54,9 @@ describe 'TOD_Test' do
   end
 render button click
 render send keys
+  after do
+    @report.log('quit driver',$succeed)
+    @report.renderall(@filename)
+    @driver.quit()
+  end
 end

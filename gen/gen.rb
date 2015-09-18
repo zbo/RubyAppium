@@ -35,9 +35,9 @@ class Gen
   def render_body(file_name,cases)
     file = File.new(WORK_SPACE+'/'+file_name, "a")
     cases.each do |ca|
-      ca.get_actions.each do |a|
-        content=a.render()
-        file.puts content
+      lines=ca.render
+      lines.each do |li|
+        file.puts li
       end
     end
     file.close

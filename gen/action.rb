@@ -4,7 +4,7 @@ class Button_click
     @id=json[0]['id']
   end
   def render
-    return 'render button click'
+    return " "*4+"@auto.clickbutton('" +@id+ "')"
   end
 end
 class Send_keys
@@ -13,7 +13,7 @@ class Send_keys
     @keys=json[0]['keys']
   end
   def render
-    return 'render send keys'
+    return " "*4+"@auto.sendkeys('"+@id+"','"+@keys+"')"
   end
 end
 class Assert_text_equal

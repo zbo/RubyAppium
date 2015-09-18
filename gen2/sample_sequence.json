@@ -1,0 +1,30 @@
+[
+  {
+    "case": {
+      "meta": [
+        {
+          "test": "simple-test"
+        }
+      ],
+      "actions": [
+        {
+          "action": "Button_click",
+          "arguments": [
+            {
+              "id": "button_id_009"
+            }
+          ]
+        },
+        {
+          "action": "Send_keys",
+          "arguments": [
+            {
+              "id": "textbox_id_009",
+              "keys": "just keys"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

@@ -52,14 +52,3 @@ describe 'TOD_Test' do
       @report.logs('already login to rc app',$succeed,$screen_cut_on)
     end
   end
- 
-  it 'simple-test' do
-    @auto.clickbutton('button_id_009')
-    @auto.sendkeys('textbox_id_009','just keys')
-  end
-  after do
-    @report.log('quit driver',$succeed)
-    @report.renderall(@filename)
-    @driver.quit()
-  end
-end
